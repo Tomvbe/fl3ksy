@@ -1,0 +1,3 @@
+<h1 *ngIf="statusInfo$ | async as info">
+  <span class="{{ info.style }}">{{ info.name }}</span>
+</h1>

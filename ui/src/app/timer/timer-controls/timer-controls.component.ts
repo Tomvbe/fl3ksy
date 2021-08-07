@@ -17,6 +17,9 @@ export class TimerControlsComponent {
   @Output()
   resetEvent = new EventEmitter();
 
+  @Output()
+  restartEvent = new EventEmitter();
+
   reset() {
     this.resetEvent.emit();
   }
@@ -25,4 +28,7 @@ export class TimerControlsComponent {
     this.startPauseEvent.emit();
   }
 
+  restart() {
+    this.restartEvent.emit();
+  }
 }

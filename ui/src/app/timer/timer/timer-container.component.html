@@ -1,9 +1,11 @@
 <div class="stopwatch">
-  <app-timer-action [action$]="action$"></app-timer-action>
+  <app-timer-status-info [statusInfo$]="statusInfo$"></app-timer-status-info>
   <app-timer-clock [display$]="display$"></app-timer-clock>
   <app-timer-controls
     [isRunning$]="isRunning$"
     (resetEvent)="reset()"
     (startPauseEvent)="toggleStartPause()"
+    (restartEvent)="restart()"
   ></app-timer-controls>
+  <app-timer-interval-input></app-timer-interval-input>
 </div>

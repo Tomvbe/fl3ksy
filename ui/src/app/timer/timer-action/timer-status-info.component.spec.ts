@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TimerActionComponent } from './timer-action.component';
+import { TimerStatusInfoComponent } from './timer-status-info.component';
 
 describe('TimerActionComponent', () => {
-  let component: TimerActionComponent;
-  let fixture: ComponentFixture<TimerActionComponent>;
+  let component: TimerStatusInfoComponent;
+  let fixture: ComponentFixture<TimerStatusInfoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TimerActionComponent ]
+      declarations: [ TimerStatusInfoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TimerActionComponent);
+    fixture = TestBed.createComponent(TimerStatusInfoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
