@@ -1,0 +1,9 @@
+<div class="stopwatch">
+  <app-timer-action [action$]="action$"></app-timer-action>
+  <app-timer-clock [display$]="display$"></app-timer-clock>
+  <app-timer-controls
+    [isRunning$]="isRunning$"
+    (resetEvent)="reset()"
+    (startPauseEvent)="toggleStartPause()"
+  ></app-timer-controls>
+</div>
