@@ -4,7 +4,8 @@ import {TimerService} from "../timer.service";
 @Component({
   selector: 'app-timer',
   templateUrl: './timer-container.component.html',
-  styleUrls: ['./timer-container.component.scss']
+  styleUrls: ['./timer-container.component.scss'],
+  providers: [TimerService]
 })
 export class TimerContainerComponent implements OnDestroy {
 
@@ -15,7 +16,7 @@ export class TimerContainerComponent implements OnDestroy {
   constructor(private readonly timer: TimerService) { }
 
   ngOnDestroy(): void {
-    this.timer.reset();
+    this.timer.dispose();
   }
 
   setStretchTime() {
