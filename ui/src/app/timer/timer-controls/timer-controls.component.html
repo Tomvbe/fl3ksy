@@ -1,12 +1,12 @@
 <div class="controls">
   <button class="buttonRestart" (click)="restart()">
-    <img id="restartButton" src="/assets/images/return-arrow-svgrepo-com.svg" alt="Restart button"/>
+    <img id="restartButton" src="./assets/images/return-arrow-svgrepo-com.svg" alt="Restart button"/>
   </button>
   <button class="buttonPlay" (click)="toggleStartPause()">
-    <img *ngIf="!(isRunning$ | async)" id="playButton" src="/assets/images/play-button-svgrepo-com.svg" alt="Play button"/>
-    <img *ngIf="isRunning$ | async" id="pauseButton" src="/assets/images/video-pause-button-svgrepo-com.svg" alt="Pause button" />
+    <img *ngIf="!(isRunning$ | async)" id="playButton" src="./assets/images/play-button-svgrepo-com.svg" alt="Play button"/>
+    <img *ngIf="isRunning$ | async" id="pauseButton" src="./assets/images/video-pause-button-svgrepo-com.svg" alt="Pause button" />
   </button>
   <button class="buttonReset" (click)="reset()">
-    <img id="resetButton" src="/assets/images/stop-button-svgrepo-com.svg" alt="Reset button"/>
+    <img id="resetButton" src="./assets/images/stop-button-svgrepo-com.svg" alt="Reset button"/>
   </button>
 </div>

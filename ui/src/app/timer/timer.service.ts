@@ -20,7 +20,7 @@ export class TimerService {
 
   private timerInterval: number | undefined;
   private elapsedTime = 0;
-  private _stretchTime = 20000;
+  private _stretchTime = 25000;
   private _restTime = 7000;
 
   private readonly display$ = new BehaviorSubject(timeToString(this._stretchTime));
