@@ -1,8 +1,5 @@
 export const timeToString = (time: number): string => {
-  const diffInHrs = time / 3600000;
-  const hh = Math.floor(diffInHrs);
-
-  const diffInMin = (diffInHrs - hh) * 60;
+  const diffInMin = time / 60000;
   const mm = Math.floor(diffInMin);
 
   const diffInSec = (diffInMin - mm) * 60;

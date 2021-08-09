@@ -1,5 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {TimerService} from "../timer.service";
+import {msToSeconds} from "../util/time.converter";
 
 @Component({
   selector: 'app-timer',
@@ -19,12 +20,12 @@ export class TimerContainerComponent implements OnDestroy {
     this.timer.dispose();
   }
 
-  setStretchTime() {
-    this.timer.stretchTime = 10000;
+  setStretchTime(stretchSeconds: number) {
+    this.timer.stretchTime = stretchSeconds;
   }
 
-  setRestTime() {
-    this.timer.restTime = 5000;
+  setRestTime(restSeconds: number) {
+    this.timer.restTime = restSeconds;
   }
 
   reset() {
@@ -38,5 +39,13 @@ export class TimerContainerComponent implements OnDestroy {
   restart() {
     this.reset();
     this.toggleStartPause();
+  }
+
+  getDefaultRestTime() {
+    return msToSeconds(TimerService.DEFAULT_REST_TIME);
+  }
+
+  getDefaultStretchTime() {
+    return msToSeconds(TimerService.DEFAULT_STRETCH_TIME);
   }
 }

@@ -1,0 +1,4 @@
+<label>Stretch seconds: {{ stretch }}</label>
+<input #stretchRef (change)="changeStretch(stretchRef.value)" [value]="stretch" type="range" min="1" max="120" class="slider">
+<label>Rest seconds: {{ rest }}</label>
+<input #restRef (change)="changeRest(restRef.value)" [value]="rest" type="range" min="1" max="120" class="slider">

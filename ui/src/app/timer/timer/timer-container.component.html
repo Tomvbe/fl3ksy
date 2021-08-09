@@ -7,5 +7,10 @@
     (startPauseEvent)="toggleStartPause()"
     (restartEvent)="restart()"
   ></app-timer-controls>
-<!--  <app-timer-interval-input></app-timer-interval-input>-->
+  <app-timer-interval-input
+    [rest]="getDefaultRestTime()"
+    [stretch]="getDefaultStretchTime()"
+    (changeRestEvent)="setRestTime($event)"
+    (changeStretchEvent)="setStretchTime($event)"
+  ></app-timer-interval-input>
 </div>

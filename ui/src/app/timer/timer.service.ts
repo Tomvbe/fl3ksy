@@ -14,16 +14,20 @@ import {
 } from "./store/timer.model";
 import {TypedAction} from "@ngrx/store/src/models";
 import {timeToString} from "./util/string.formatter";
+import {secondsToMs} from "./util/time.converter";
 
 @Injectable()
 export class TimerService {
 
+  static readonly DEFAULT_STRETCH_TIME = 25000;
+  static readonly DEFAULT_REST_TIME = 7000;
+
   private timerInterval: number | undefined;
   private elapsedTime = 0;
-  private _stretchTime = 25000;
-  private _restTime = 7000;
+  private _stretchTime = TimerService.DEFAULT_STRETCH_TIME;
+  private _restTime = TimerService.DEFAULT_REST_TIME;
 
-  private readonly display$ = new BehaviorSubject(timeToString(this._stretchTime));
+  private readonly display$ = this.resetDisplay();
   private readonly subscription =
     this.store.select(getCurrentStatus).pipe(
       map(newStatus => {
@@ -60,12 +64,13 @@ export class TimerService {
     return this.store.select(getCurrentStatus).pipe(map(status => timerStatusMap.get(status)))
   }
 
-  set stretchTime(value: number) {
-    this._stretchTime = value;
+  set stretchTime(seconds: number) {
+    this._stretchTime = secondsToMs(seconds);
+    this.reset();
   }
 
-  set restTime(value: number) {
-    this._restTime = value;
+  set restTime(seconds: number) {
+    this._restTime = secondsToMs(seconds);
   }
 
   dispose() {
@@ -106,4 +111,7 @@ export class TimerService {
     this.store.dispatch(action);
   }
 
+  private resetDisplay(): BehaviorSubject<string> {
+    return new BehaviorSubject(timeToString(this._stretchTime));
+  }
 }
