@@ -1,8 +1,11 @@
 import {Action, createReducer, on} from "@ngrx/store";
-import {finishAction, resetAction, startPauseToggleAction} from "./timer.actions";
+import {allowSleepAction, finishAction, resetAction, startPauseToggleAction, stayAwakeAction} from "./timer.actions";
 import {TimerState, TimerStatus} from "./timer.model";
+import NoSleep from "nosleep.js";
 
 export const initialState: TimerState = {
+  isStayAwake: false,
+  noSleep: undefined,
   restTime: 2000,
   stretchTime: 5000,
   current: TimerStatus.PAUSE,
@@ -30,6 +33,30 @@ const _timerReducer = createReducer(
       ...state,
       current: state.current == TimerStatus.STRETCH ? TimerStatus.REST : TimerStatus.STRETCH,
       prev: state.current
+    }
+  }),
+  on(stayAwakeAction, (state) => {
+
+    const noSleep = state.noSleep ? state.noSleep : new NoSleep();
+    if (!state.isStayAwake) {
+      noSleep.enable().finally();
+      // todo mss effect nodig
+    }
+
+    return {
+      ...state,
+      isStayAwake: true,
+      noSleep
+    }
+  }),
+  on(allowSleepAction, (state) => {
+    if (state.isStayAwake) {
+      // state.noSleep.disable();
+    }
+
+    return {
+      ...state,
+      isStayAwake: false
     }
   })
 );

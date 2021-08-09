@@ -1,6 +1,8 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TimerService} from "../timer.service";
 import {msToSeconds} from "../util/time.converter";
+import {StayAwakeService} from "../stay-awake.service";
+import {tap} from "rxjs/operators";
 
 @Component({
   selector: 'app-timer',
@@ -8,13 +10,26 @@ import {msToSeconds} from "../util/time.converter";
   styleUrls: ['./timer-container.component.scss'],
   providers: [TimerService]
 })
-export class TimerContainerComponent implements OnDestroy {
+export class TimerContainerComponent implements OnInit, OnDestroy {
 
   display$ = this.timer.getDisplay();
   isRunning$ = this.timer.isStretchingOrResting();
   statusInfo$ = this.timer.getCurrentStatusInfo();
 
-  constructor(private readonly timer: TimerService) { }
+  constructor(
+    private readonly timer: TimerService,
+    private readonly stayAwakeService: StayAwakeService
+  ) { }
+
+  ngOnInit(): void {
+    this.isRunning$.pipe(
+      tap(x => console.log(x)),
+      tap(isRunning => isRunning
+        ? this.stayAwakeService.stayAwake()
+        : this.stayAwakeService.allowSleep()
+      )
+    ).subscribe()
+  }
 
   ngOnDestroy(): void {
     this.timer.dispose();

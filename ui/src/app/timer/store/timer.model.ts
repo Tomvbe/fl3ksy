@@ -1,4 +1,5 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
+import NoSleep from "nosleep.js";
 
 export enum TimerStatus {
   PAUSE, STRETCH, REST
@@ -19,7 +20,9 @@ export interface TimerState {
   current: TimerStatus,
   prev: TimerStatus,
   stretchTime: number,
-  restTime: number
+  restTime: number,
+  isStayAwake: boolean,
+  noSleep: NoSleep | undefined
 }
 
 export const getTimerState = createFeatureSelector<TimerState>('timer');
