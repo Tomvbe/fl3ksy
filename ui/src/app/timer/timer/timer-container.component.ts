@@ -3,6 +3,7 @@ import {TimerService} from "../timer.service";
 import {msToSeconds} from "../util/time.converter";
 import {StayAwakeService} from "../stay-awake.service";
 import {tap} from "rxjs/operators";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-timer',
@@ -12,6 +13,7 @@ import {tap} from "rxjs/operators";
 })
 export class TimerContainerComponent implements OnInit, OnDestroy {
 
+  timerIsRunningSubscription!: Subscription;
   display$ = this.timer.getDisplay();
   isRunning$ = this.timer.isStretchingOrResting();
   statusInfo$ = this.timer.getCurrentStatusInfo();
@@ -22,17 +24,17 @@ export class TimerContainerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.isRunning$.pipe(
-      tap(x => console.log(x)),
+    this.timerIsRunningSubscription = this.isRunning$.pipe(
       tap(isRunning => isRunning
         ? this.stayAwakeService.stayAwake()
         : this.stayAwakeService.allowSleep()
       )
-    ).subscribe()
+    ).subscribe();
   }
 
   ngOnDestroy(): void {
     this.timer.dispose();
+    this.timerIsRunningSubscription.unsubscribe();
   }
 
   setStretchTime(stretchSeconds: number) {
