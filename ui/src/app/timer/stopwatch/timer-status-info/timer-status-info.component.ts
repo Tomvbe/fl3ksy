@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Observable} from "rxjs";
-import {TimerStatusInfo} from "../store/timer.model";
+import {TimerStatusInfo} from "../../store/timer.model";
 
 @Component({
   selector: 'app-timer-status-info',
