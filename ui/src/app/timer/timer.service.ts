@@ -64,9 +64,17 @@ export class TimerService {
     return this.store.select(getCurrentStatus).pipe(map(status => timerStatusMap.get(status)))
   }
 
+  get stretchTime(): number {
+    return this._stretchTime;
+  }
+
   set stretchTime(seconds: number) {
     this._stretchTime = secondsToMs(seconds);
     this.reset();
+  }
+
+  get restTime(): number {
+    return this._restTime;
   }
 
   set restTime(seconds: number) {

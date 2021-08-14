@@ -1,1 +1,6 @@
-<p>timer-settings works!</p>
+<app-timer-interval-input
+  [rest]="getRestTime()"
+  [stretch]="getStretchTime()"
+  (changeRestEvent)="setRestTime($event)"
+  (changeStretchEvent)="setStretchTime($event)"
+></app-timer-interval-input>

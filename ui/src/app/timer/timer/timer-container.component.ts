@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TimerService} from "../timer.service";
-import {msToSeconds} from "../util/time.converter";
 import {StayAwakeService} from "../stay-awake.service";
 import {tap} from "rxjs/operators";
 import {Subscription} from "rxjs";
@@ -14,9 +13,6 @@ import {Subscription} from "rxjs";
 export class TimerContainerComponent implements OnInit, OnDestroy {
 
   timerIsRunningSubscription!: Subscription;
-  display$ = this.timer.getDisplay();
-  isRunning$ = this.timer.isStretchingOrResting();
-  statusInfo$ = this.timer.getCurrentStatusInfo();
 
   constructor(
     private readonly timer: TimerService,
@@ -24,7 +20,7 @@ export class TimerContainerComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.timerIsRunningSubscription = this.isRunning$.pipe(
+    this.timerIsRunningSubscription = this.timer.isStretchingOrResting().pipe(
       tap(isRunning => isRunning
         ? this.stayAwakeService.stayAwake()
         : this.stayAwakeService.allowSleep()
@@ -37,32 +33,4 @@ export class TimerContainerComponent implements OnInit, OnDestroy {
     this.timerIsRunningSubscription.unsubscribe();
   }
 
-  setStretchTime(stretchSeconds: number) {
-    this.timer.stretchTime = stretchSeconds;
-  }
-
-  setRestTime(restSeconds: number) {
-    this.timer.restTime = restSeconds;
-  }
-
-  reset() {
-    this.timer.reset();
-  }
-
-  toggleStartPause() {
-    this.timer.toggleStartPause();
-  }
-
-  restart() {
-    this.reset();
-    this.toggleStartPause();
-  }
-
-  getDefaultRestTime() {
-    return msToSeconds(TimerService.DEFAULT_REST_TIME);
-  }
-
-  getDefaultStretchTime() {
-    return msToSeconds(TimerService.DEFAULT_STRETCH_TIME);
-  }
 }

@@ -1,17 +1,1 @@
-<div class="stopwatch">
-  <app-timer-settings-button></app-timer-settings-button>
-  <app-timer-status-info [statusInfo$]="statusInfo$"></app-timer-status-info>
-  <app-timer-clock [display$]="display$"></app-timer-clock>
-  <app-timer-controls
-    [isRunning$]="isRunning$"
-    (resetEvent)="reset()"
-    (startPauseEvent)="toggleStartPause()"
-    (restartEvent)="restart()"
-  ></app-timer-controls>
-  <app-timer-interval-input
-    [rest]="getDefaultRestTime()"
-    [stretch]="getDefaultStretchTime()"
-    (changeRestEvent)="setRestTime($event)"
-    (changeStretchEvent)="setStretchTime($event)"
-  ></app-timer-interval-input>
-</div>
+<router-outlet></router-outlet>

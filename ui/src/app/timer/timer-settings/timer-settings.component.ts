@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {msToSeconds} from "../util/time.converter";
+import {TimerService} from "../timer.service";
 
 @Component({
   selector: 'app-timer-settings',
@@ -7,9 +9,26 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TimerSettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly timer: TimerService) { }
 
   ngOnInit(): void {
+    console.log('init settings')
+  }
+
+  setStretchTime(stretchSeconds: number) {
+    this.timer.stretchTime = stretchSeconds;
+  }
+
+  setRestTime(restSeconds: number) {
+    this.timer.restTime = restSeconds;
+  }
+
+  getRestTime() {
+    return msToSeconds(this.timer.restTime);
+  }
+
+  getStretchTime() {
+    return msToSeconds(this.timer.stretchTime);
   }
 
 }
