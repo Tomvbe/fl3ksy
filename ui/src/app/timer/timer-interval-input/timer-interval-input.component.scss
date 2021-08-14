@@ -9,27 +9,21 @@
 }
 
 .container > div {
-  font-size: 20px;
-}
-
-.row {
-  margin-top: 1em;
+  font-size: 25px;
 }
 
 .stretchLabel {
   grid-area: stretchLabel;
-  width: 200px;
-  //grid-column-start: 1;
-  //grid-column-end: 2;
+  width: 225px;
 }
 
 .stretchInput {
   grid-area: stretchInput;
   width: 10px;
-  //grid-column-start: 2;
 }
 
-.foo{
+.secondsInput{
+  height: 30px;
   width: 50px;
 }
 
