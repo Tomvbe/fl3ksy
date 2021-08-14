@@ -15,7 +15,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { StopwatchComponent } from './stopwatch/stopwatch.component';
 import { TimerSettingsTitleComponent } from './settings/timer-settings-title/timer-settings-title.component';
 import { ReturnButtonComponent } from './return-button/return-button.component';
-import {HomeButtonComponent} from "./home-button/home-button.component";
+import {HomeButtonComponent} from "../shared/home-button/home-button.component";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -30,7 +31,6 @@ import {HomeButtonComponent} from "./home-button/home-button.component";
     StopwatchComponent,
     TimerSettingsTitleComponent,
     ReturnButtonComponent,
-    HomeButtonComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +38,8 @@ import {HomeButtonComponent} from "./home-button/home-button.component";
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({timer: timerReducer}),
-    TimerRoutingModule
+    TimerRoutingModule,
+    SharedModule
   ],
   exports: [
     TimerContainerComponent

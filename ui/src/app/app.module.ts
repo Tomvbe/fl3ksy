@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {TimerModule} from "./timer/timer.module";
 import { HomeComponent } from './home/home.component';
-import { HomeButtonComponent } from './timer/home-button/home-button.component';
+import { HomeButtonComponent } from './shared/home-button/home-button.component';
 
 @NgModule({
     declarations: [
