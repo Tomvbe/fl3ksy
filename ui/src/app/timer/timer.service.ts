@@ -19,7 +19,7 @@ import {secondsToMs} from "./util/time.converter";
 @Injectable()
 export class TimerService {
 
-  static readonly DEFAULT_STRETCH_TIME = 25000;
+  static readonly DEFAULT_STRETCH_TIME = 22000;
   static readonly DEFAULT_REST_TIME = 7000;
 
   private timerInterval: number | undefined;
