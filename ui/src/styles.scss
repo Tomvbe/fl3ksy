@@ -7,3 +7,12 @@ body {
 .mb2 {
   margin-bottom: 2em;
 }
+
+button {
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+  border: none;
+  margin: 0;
+  outline: none;
+}

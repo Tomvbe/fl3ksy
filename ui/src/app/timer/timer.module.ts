@@ -15,6 +15,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { StopwatchComponent } from './stopwatch/stopwatch.component';
 import { TimerSettingsTitleComponent } from './settings/timer-settings-title/timer-settings-title.component';
 import { ReturnButtonComponent } from './return-button/return-button.component';
+import {HomeButtonComponent} from "./home-button/home-button.component";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { ReturnButtonComponent } from './return-button/return-button.component';
     TimerSettingsButtonComponent,
     StopwatchComponent,
     TimerSettingsTitleComponent,
-    ReturnButtonComponent
+    ReturnButtonComponent,
+    HomeButtonComponent
   ],
   imports: [
     CommonModule,
