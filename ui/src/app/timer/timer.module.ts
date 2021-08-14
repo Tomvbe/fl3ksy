@@ -13,6 +13,7 @@ import {TimerSettingsButtonComponent} from './timer-settings/timer-settings-butt
 import {TimerRoutingModule} from "./timer-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import { StopwatchComponent } from './stopwatch/stopwatch.component';
+import { TimerSettingsTitleComponent } from './timer-settings/timer-settings-title/timer-settings-title.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { StopwatchComponent } from './stopwatch/stopwatch.component';
     TimerIntervalInputComponent,
     TimerSettingsComponent,
     TimerSettingsButtonComponent,
-    StopwatchComponent
+    StopwatchComponent,
+    TimerSettingsTitleComponent
   ],
   imports: [
     CommonModule,
