@@ -4,6 +4,7 @@ import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
+  { path: 'activities', loadChildren: () => import('./activities/activities.module').then(m => m.ActivitiesModule) },
   // { path: '', redirectTo: 'timer', pathMatch: 'full'}
 ];
 
