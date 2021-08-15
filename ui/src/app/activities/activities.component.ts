@@ -8,20 +8,9 @@ import {ActivityService} from "./activity.service";
 })
 export class ActivitiesComponent implements OnInit {
 
-  clicksOnInit = localStorage.getItem('clicks');
-
-  activities = this.activityService.getActivities();
-
   constructor(private readonly activityService: ActivityService) { }
 
   ngOnInit(): void {
   }
 
-  clicked() {
-    const clicks = localStorage.getItem('clicks');
-
-    clicks != null
-      ? localStorage.setItem('clicks', (parseInt(clicks) + 1) + '')
-      : localStorage.setItem('clicks', '1');
-  }
 }

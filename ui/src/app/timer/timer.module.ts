@@ -12,10 +12,9 @@ import {TimerSettingsComponent} from './settings/timer-settings.component';
 import {TimerSettingsButtonComponent} from './settings/timer-settings-button/timer-settings-button.component';
 import {TimerRoutingModule} from "./timer-routing.module";
 import {HttpClientModule} from "@angular/common/http";
-import { StopwatchComponent } from './stopwatch/stopwatch.component';
-import { TimerSettingsTitleComponent } from './settings/timer-settings-title/timer-settings-title.component';
-import { ReturnButtonComponent } from './return-button/return-button.component';
-import {HomeButtonComponent} from "../shared/home-button/home-button.component";
+import {StopwatchComponent} from './stopwatch/stopwatch.component';
+import {TimerSettingsTitleComponent} from './settings/timer-settings-title/timer-settings-title.component';
+import {ReturnButtonComponent} from '../shared/return-button/return-button.component';
 import {SharedModule} from "../shared/shared.module";
 
 
@@ -30,7 +29,6 @@ import {SharedModule} from "../shared/shared.module";
     TimerSettingsButtonComponent,
     StopwatchComponent,
     TimerSettingsTitleComponent,
-    ReturnButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -42,7 +40,8 @@ import {SharedModule} from "../shared/shared.module";
     SharedModule
   ],
   exports: [
-    TimerContainerComponent
+    TimerContainerComponent,
+    ReturnButtonComponent
   ]
 })
 export class TimerModule { }

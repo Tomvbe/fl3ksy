@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { ActivitiesRoutingModule } from './activities-routing.module';
 import { ActivitiesComponent } from './activities.component';
+import { WipComponent } from './wip/wip.component';
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
   declarations: [
-    ActivitiesComponent
+    ActivitiesComponent,
+    WipComponent
   ],
-  imports: [
-    CommonModule,
-    ActivitiesRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        ActivitiesRoutingModule,
+        SharedModule
+    ]
 })
 export class ActivitiesModule { }
