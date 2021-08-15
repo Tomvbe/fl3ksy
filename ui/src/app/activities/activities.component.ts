@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivityService} from "./activity.service";
 
 @Component({
   selector: 'app-activities',
@@ -9,7 +10,9 @@ export class ActivitiesComponent implements OnInit {
 
   clicksOnInit = localStorage.getItem('clicks');
 
-  constructor() { }
+  activities = this.activityService.getActivities();
+
+  constructor(private readonly activityService: ActivityService) { }
 
   ngOnInit(): void {
   }
