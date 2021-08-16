@@ -1,0 +1,37 @@
+#activities {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+#activities td, #activities th {
+  padding: 8px;
+  text-align: center;
+}
+
+#activities td:first-child, #activities th:first-child {
+  text-align: left;
+}
+
+//#activities tr:nth-child(even){background-color: #f2f2f2;}
+
+#activities tr:hover {background-color: #ddd;}
+
+#activities tr {
+  background-color: #ffffff;
+  border-bottom: 1px solid #000000;
+  border-top: 1px solid #000000;
+  border-collapse: collapse;
+}
+
+#activities th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: #569dab;
+  color: white;
+}
+
+.button-add {
+  margin-right: 6px;
+}

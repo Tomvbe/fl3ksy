@@ -14,7 +14,11 @@ export enum ActivityType {
   STRETCH, POWER
 }
 
-export interface ActivityLog {
-  activityId: number;
-  timestamp: number;
+export const DATE_FORMAT = 'YYYY-MM-DD';
+
+export interface DailyActivity {
+  dailyActivityId: number;
+  activity: Activity;
+  date: string;
+  countCompleted: number;
 }

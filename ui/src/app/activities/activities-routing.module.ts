@@ -4,13 +4,13 @@ import {ActivitiesComponent} from './activities.component';
 import {WipComponent} from "./wip/wip.component";
 import {DayTrackerComponent} from "./day-tracker/day-tracker.component";
 import {AddActivityComponent} from "./day-tracker/add-activity/add-activity.component";
-import {MenuComponent} from "./day-tracker/menu/menu.component";
+import {DayTrackerContainerComponent} from "./day-tracker/container/day-tracker-container.component";
 
 const routes: Routes = [
   {path: '', component: ActivitiesComponent},
   {
     path: 'daily', component: DayTrackerComponent, children: [
-      {path: '', component: MenuComponent},
+      {path: '', component: DayTrackerContainerComponent},
       {path: 'add', component: AddActivityComponent}
     ]
   },

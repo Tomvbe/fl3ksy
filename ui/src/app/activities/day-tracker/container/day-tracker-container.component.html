@@ -1,0 +1,6 @@
+<button class="button-menu" routerLink="add">Add activity to day</button>
+<day-tracker-activity-list
+  [activities$]="activities$"
+  (addActivityExecution)="addActivityExecution($event)"
+  (removeActivityExecution)="removeActivityExecution($event)">
+</day-tracker-activity-list>

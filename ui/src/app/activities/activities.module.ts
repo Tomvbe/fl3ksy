@@ -8,7 +8,7 @@ import {SharedModule} from "../shared/shared.module";
 import { DayTrackerComponent } from './day-tracker/day-tracker.component';
 import { ActivityListComponent } from './day-tracker/activity-list/activity-list.component';
 import { AddActivityComponent } from './day-tracker/add-activity/add-activity.component';
-import { MenuComponent } from './day-tracker/menu/menu.component';
+import { DayTrackerContainerComponent } from './day-tracker/container/day-tracker-container.component';
 
 
 @NgModule({
@@ -18,7 +18,7 @@ import { MenuComponent } from './day-tracker/menu/menu.component';
     DayTrackerComponent,
     ActivityListComponent,
     AddActivityComponent,
-    MenuComponent
+    DayTrackerContainerComponent
   ],
     imports: [
         CommonModule,
