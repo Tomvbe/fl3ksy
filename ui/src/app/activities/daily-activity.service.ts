@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {DailyActivity} from "./activities.model";
+import {ActivityType, DailyActivity} from "./activities.model";
 import {BehaviorSubject, Observable} from "rxjs";
 import * as moment from "moment";
+import {replacer, reviver} from "../shared/util/map.serializer";
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +18,57 @@ export class DailyActivityService {
   }
 
   refresh(activities: DailyActivity[] = this.getArrayFromMap(this.fetchActivities())): void {
-    this.activities$.next(activities);
+    // TODO remove after implementing add
+    const activity = {
+      dailyActivityId: 1,
+      activity:
+        {
+          activityId: 2,
+          name: 'Shoulders',
+          type: ActivityType.STRETCH,
+          description: 'Rotate shoulders back',
+          stretchMs: 60000,
+          restMs: 5000,
+          setsPerDay: 3,
+          iterationsInSet: 2,
+          positionsPerIteration: 1
+        },
+      date: '2021-08-20',
+      countCompleted: 2
+    } as DailyActivity;
+
+    const activity2 = {
+      dailyActivityId: 2,
+      activity:
+        {
+          activityId: 1,
+          name: 'Back',
+          type: ActivityType.STRETCH,
+          description: 'Rotate shoulders back',
+          stretchMs: 60000,
+          restMs: 5000,
+          setsPerDay: 2,
+          iterationsInSet: 2,
+          positionsPerIteration: 1
+        },
+      date: '2021-08-20',
+      countCompleted: 2
+    } as DailyActivity;
+
+    this.activities$.next(activities?.length > 0 ? activities :[activity, activity2]);
+    // this.activities$.next(activities);
   }
 
   add(activity: DailyActivity) {
-    const activityMap = this.fetchActivities().set(activity.activity.activityId, activity);
+    const activityMap = this.fetchActivities();
+    activityMap.set(activity.dailyActivityId, activity);
     this.saveActivities(activityMap);
     this.refresh(this.getArrayFromMap(activityMap));
   }
 
   remove(activity: DailyActivity) {
     const activityMap = this.fetchActivities();
-    activityMap.delete(activity.activity.activityId);
+    activityMap.delete(activity.dailyActivityId);
     this.saveActivities(activityMap);
     this.refresh(this.getArrayFromMap(activityMap));
   }
@@ -38,17 +78,17 @@ export class DailyActivityService {
   }
 
   incrementCount(activity: DailyActivity) {
-    this.add({...activity, countCompleted: ++activity.countCompleted});
+    this.add({...activity, countCompleted: activity.countCompleted + 1 });
   }
 
   decrementCount(activity: DailyActivity) {
-    this.add({...activity, countCompleted: Math.max(0, --activity.countCompleted)});
+    this.add({...activity, countCompleted: Math.max(0, activity.countCompleted - 1)});
   }
 
   private fetchActivities(): Map<number, DailyActivity> {
     const dailyActivities = localStorage.getItem(DailyActivityService.localStorageKey);
     if (dailyActivities) {
-      const dailyActivityMap = JSON.parse(dailyActivities) as Map<number, DailyActivity>;
+      const dailyActivityMap = JSON.parse(dailyActivities, reviver) as Map<number, DailyActivity>;
       this.removeActivitiesFromPreviousDays(dailyActivityMap);
       return dailyActivityMap;
     }
@@ -56,13 +96,14 @@ export class DailyActivityService {
   }
 
   private saveActivities(activityMap: Map<number, DailyActivity>) {
-    localStorage.setItem(DailyActivityService.localStorageKey, JSON.stringify(activityMap));
+    const stringify = JSON.stringify(activityMap, replacer);
+    localStorage.setItem(DailyActivityService.localStorageKey, stringify);
   }
 
-  private removeActivitiesFromPreviousDays(dailyActivityMap: Map<number, DailyActivity>) {
+  private removeActivitiesFromPreviousDays(dailyActivityMap: Map<number, DailyActivity>): void {
     for (let activity of dailyActivityMap.values()) {
       if (!this.isForCurrentDay(activity)) {
-        dailyActivityMap.delete(activity.activity.activityId);
+        dailyActivityMap.delete(activity.dailyActivityId);
       }
     }
   }

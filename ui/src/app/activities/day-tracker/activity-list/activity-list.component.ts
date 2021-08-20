@@ -13,16 +13,16 @@ export class ActivityListComponent {
   activities$!: Observable<DailyActivity[]>;
 
   @Output()
-  addActivityExecution = new EventEmitter();
+  addActivityExecution = new EventEmitter<DailyActivity>();
 
   @Output()
-  removeActivityExecution = new EventEmitter();
+  removeActivityExecution = new EventEmitter<DailyActivity>();
 
-  add(dayActivityId: number) {
+  incrementCount(dayActivityId: DailyActivity) {
     this.addActivityExecution.emit(dayActivityId);
   }
 
-  remove(dayActivityId: number) {
+  decrementCount(dayActivityId: DailyActivity) {
     this.removeActivityExecution.emit(dayActivityId);
   }
 

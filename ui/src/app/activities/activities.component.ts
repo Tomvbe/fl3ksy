@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivityService} from "./activity.service";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-activities',
@@ -8,7 +7,7 @@ import {ActivityService} from "./activity.service";
 })
 export class ActivitiesComponent implements OnInit {
 
-  constructor(private readonly activityService: ActivityService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }

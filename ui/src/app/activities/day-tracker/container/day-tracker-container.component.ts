@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {DailyActivityService} from "../../daily-activity.service";
+import {DailyActivity} from "../../activities.model";
 
 @Component({
   selector: 'day-tracker-container',
@@ -17,11 +18,11 @@ export class DayTrackerContainerComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  removeActivityExecution($event: any) {
-    this.dailyActivityService.decrementCount($event);
+  removeActivityExecution(dailyActivity: DailyActivity) {
+    this.dailyActivityService.decrementCount(dailyActivity);
   }
 
-  addActivityExecution($event: any) {
-    this.dailyActivityService.incrementCount($event);
+  addActivityExecution(dailyActivity: DailyActivity) {
+    this.dailyActivityService.incrementCount(dailyActivity);
   }
 }
