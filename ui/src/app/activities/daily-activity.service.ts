@@ -2,24 +2,34 @@ import {Injectable} from '@angular/core';
 import {Activity, DailyActivity, DATE_FORMAT} from "./activities.model";
 import {BehaviorSubject, Observable} from "rxjs";
 import * as moment from "moment";
-import {replacer, reviver} from "../shared/util/map.serializer";
 import {ActivityService} from "./activity.service";
+import {DailyActivityRepository} from "./daily-activity.repository";
+import {getArrayFromMap} from "../shared/util/generic.mapper";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DailyActivityService {
 
-  private static readonly localStorageKey = 'dailyActivities';
+  private readonly activeDailyActivities$ = new BehaviorSubject<DailyActivity[]>([])
+  private readonly inActiveActivities$ = new BehaviorSubject<Activity[]>([]);
 
-  private readonly activities$ = new BehaviorSubject<DailyActivity[]>([])
-
-  constructor(private readonly activityService: ActivityService) {
-    this.refresh();
+  constructor(
+    private readonly activityService: ActivityService,
+    private readonly repository: DailyActivityRepository
+  ) {
+    this.refreshActiveDailyActivities();
   }
 
-  refresh(activities: DailyActivity[] = this.getArrayFromMap(this.fetchDailyActivities())): void {
-    this.activities$.next(activities);
+  refreshActiveDailyActivities(activities = this.repository.findAll()): void {
+    this.activeDailyActivities$.next(getArrayFromMap(activities));
+  }
+
+  refreshInactiveActivities(activeDailyActivities = this.repository.findAll()) {
+    this.inActiveActivities$.next(
+      this.activityService.getActivities()
+        .filter(activity => !Array.from(activeDailyActivities.keys()).includes(activity.activityId))
+    );
   }
 
   create(activity: Activity): DailyActivity {
@@ -34,21 +44,21 @@ export class DailyActivityService {
   }
 
   private add(activity: DailyActivity): void {
-    const activityMap = this.fetchDailyActivities();
+    const activityMap = this.repository.findAll();
     activityMap.set(activity.activity.activityId, activity);
-    this.saveActivities(activityMap);
-    this.refresh(this.getArrayFromMap(activityMap));
+    this.repository.save(activityMap);
+    this.refreshActiveDailyActivities(activityMap);
   }
 
   remove(activity: DailyActivity) {
-    const activityMap = this.fetchDailyActivities();
+    const activityMap = this.repository.findAll();
     activityMap.delete(activity.activity.activityId);
-    this.saveActivities(activityMap);
-    this.refresh(this.getArrayFromMap(activityMap));
+    this.repository.save(activityMap);
+    this.refreshActiveDailyActivities(activityMap);
   }
 
   findAll(): Observable<DailyActivity[]> {
-    return this.activities$;
+    return this.activeDailyActivities$;
   }
 
   incrementCount(activity: DailyActivity) {
@@ -59,49 +69,9 @@ export class DailyActivityService {
     this.add({...activity, countCompleted: Math.max(0, activity.countCompleted - 1)});
   }
 
-  private fetchDailyActivities(): Map<number, DailyActivity> {
-    const dailyActivities = localStorage.getItem(DailyActivityService.localStorageKey);
-    if (dailyActivities) {
-      const dailyActivityMap = JSON.parse(dailyActivities, reviver) as Map<number, DailyActivity>;
-      this.removeActivitiesFromPreviousDays(dailyActivityMap);
-      return dailyActivityMap;
-    }
-    return new Map<number, DailyActivity>();
-  }
-
-  private saveActivities(activityMap: Map<number, DailyActivity>) {
-    const stringify = JSON.stringify(activityMap, replacer);
-    localStorage.setItem(DailyActivityService.localStorageKey, stringify);
-  }
-
-  private removeActivitiesFromPreviousDays(dailyActivityMap: Map<number, DailyActivity>): void {
-    for (let activity of dailyActivityMap.values()) {
-      if (!this.isForCurrentDay(activity)) {
-        dailyActivityMap.delete(activity.activity.activityId);
-      }
-    }
-  }
-
-  private isForCurrentDay(activity: DailyActivity): boolean {
-    return moment(activity.date).isBetween(
-      moment().startOf('day'),
-      moment().endOf('day'),
-      null,
-      '[]'
-    );
-  }
-
-  private getArrayFromMap(map: Map<any, any>) {
-    return Array.from(map.values());
-  }
-
   getActivitiesNotYetAddedToDay(): Observable<Activity[]> {
-    const map = this.fetchDailyActivities();
-    const activeDailyActivities = Array.from(map.keys());
-
-    return new BehaviorSubject<Activity[]>(
-      this.activityService.getActivities()
-        .filter(activity => !activeDailyActivities.includes(activity.activityId))
-    );
+    this.refreshInactiveActivities(this.repository.findAll());
+    return this.inActiveActivities$;
   }
+
 }
