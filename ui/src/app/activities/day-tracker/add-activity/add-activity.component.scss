@@ -1,0 +1,53 @@
+.button-add {
+  background-color: #acdcad;
+}
+
+.button-cancel {
+  background-color: #f24c86;
+}
+
+.button-return {
+  background-color: #569dab;
+  border: 2px solid black;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 70%;
+}
+
+.add-activity-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em 1em 0 1em;
+}
+
+.no-activity-row {
+  display: flex;
+  justify-content: center;
+  padding: 1em 1em 0 1em;
+}
+
+.button-add-activity {
+  border: 2px solid black;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 40%;
+}
+
+.dropdown-add-activity {
+  border: 2px solid black;
+  color: black;
+  padding: 15px 32px;
+  width: 100%;
+}

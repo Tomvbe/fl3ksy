@@ -1,1 +1,30 @@
-<p>add-activity works!</p>
+<h2>Create daily activity</h2>
+<div *ngIf="(activitiesThatCanBeAdded$ | async) as activities">
+  <div *ngIf="activities.length > 0">
+    <div class="add-activity-row">
+      <select [(ngModel)]="selectedActivity" class="dropdown-add-activity" name="daily-activities"
+              id="daily-activities">
+        <option
+          *ngFor="let activity of activities"
+          [ngValue]="activity"
+        >
+          {{ activity.name }}
+        </option>
+      </select>
+    </div>
+    <div class="add-activity-row">
+      <button class="button-cancel button-add-activity" routerLink="..">Cancel</button>
+      <button class="button-add button-add-activity" (click)="create()">Create</button>
+    </div>
+  </div>
+  <div *ngIf="activities.length === 0">
+    <div class="no-activity-row">
+      <p>You have already linked all activities to this day!</p>
+    </div>
+    <div class="no-activity-row">
+      <button class="button-return" routerLink="..">Go back</button>
+    </div>
+  </div>
+</div>
+
+

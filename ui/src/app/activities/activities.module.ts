@@ -9,6 +9,7 @@ import { DayTrackerComponent } from './day-tracker/day-tracker.component';
 import { ActivityListComponent } from './day-tracker/activity-list/activity-list.component';
 import { AddActivityComponent } from './day-tracker/add-activity/add-activity.component';
 import { DayTrackerContainerComponent } from './day-tracker/container/day-tracker-container.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { DayTrackerContainerComponent } from './day-tracker/container/day-tracke
     imports: [
         CommonModule,
         ActivitiesRoutingModule,
-        SharedModule
+        SharedModule,
+        FormsModule
     ]
 })
 export class ActivitiesModule { }

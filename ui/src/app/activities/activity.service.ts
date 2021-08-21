@@ -24,6 +24,7 @@ export class ActivityService {
   initLocalStorage(): Activity[] {
     return [
       {
+        activityId: 0,
         name: 'Fingers',
         type: ActivityType.STRETCH,
         description: 'Wall stretch for hand/fingers',
@@ -34,6 +35,7 @@ export class ActivityService {
         positionsPerIteration: 1,
       },
       {
+        activityId: 1,
         name: 'Wrists',
         type: ActivityType.STRETCH,
         description: 'Stretch flexors and extensors of both wrists.',
@@ -44,6 +46,7 @@ export class ActivityService {
         positionsPerIteration: 4
       },
       {
+        activityId: 2,
         name: 'Shoulders',
         type: ActivityType.STRETCH,
         description: 'Rotate shoulders back',
@@ -54,6 +57,7 @@ export class ActivityService {
         positionsPerIteration: 1
       },
       {
+        activityId: 3,
         name: 'Neck',
         type: ActivityType.STRETCH,
         description: 'Neck forward and sideways',
@@ -64,6 +68,7 @@ export class ActivityService {
         positionsPerIteration: 2
       },
       {
+        activityId: 4,
         name: 'Back',
         type: ActivityType.STRETCH,
         description: 'Flatten back against door',
@@ -73,6 +78,7 @@ export class ActivityService {
         iterationsInSet: 3,
         positionsPerIteration: 1
       },      {
+        activityId: 5,
         name: 'Upside down glasses',
         type: ActivityType.STRETCH,
         description: 'Put on the glasses upside down (:',
