@@ -2,17 +2,17 @@
   <tr>
     <th>Activity</th>
     <th>Completed / Target</th>
-    <th>Add / Remove</th>
+    <th>Remove / Add</th>
   </tr>
   <tr *ngFor="let activity of activities$ | async">
     <td>{{ activity.activity.name }}</td>
     <td>{{ activity.countCompleted + '/' + activity.activity.setsPerDay }}</td>
     <td>
-      <button class="button-add" (click)="incrementCount(activity)">
-        <img src="./assets/images/add-plus-svgrepo-com.svg" alt="Add button"/>
-      </button>
       <button class="button-remove" (click)="decrementCount(activity)">
         <img src="./assets/images/minus-svgrepo-com.svg" alt="Remove button"/>
+      </button>
+      <button class="button-add" (click)="incrementCount(activity)">
+        <img src="./assets/images/add-plus-svgrepo-com.svg" alt="Add button"/>
       </button>
     </td>
   </tr>
