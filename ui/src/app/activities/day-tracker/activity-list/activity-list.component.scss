@@ -14,12 +14,7 @@
   text-align: left;
 }
 
-//#activities tr:nth-child(even){background-color: #f2f2f2;}
-
-#activities tr:hover {background-color: #ddd;}
-
 #activities tr {
-  background-color: #ffffff;
   border-bottom: 1px solid #000000;
   border-top: 1px solid #000000;
   border-collapse: collapse;
@@ -34,4 +29,12 @@
 
 .button-remove {
   margin-right: 6px;
+}
+
+.unfinished {
+  background-color: #ffffff;
+}
+
+.finished {
+  background-color: #72b975;
 }

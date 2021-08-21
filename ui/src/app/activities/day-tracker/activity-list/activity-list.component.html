@@ -4,7 +4,9 @@
     <th>Completed / Target</th>
     <th>Remove / Add</th>
   </tr>
-  <tr *ngFor="let activity of activities$ | async">
+  <tr
+    *ngFor="let activity of activities$ | async"
+    [class]="activity.countCompleted >= activity.activity.setsPerDay ? 'finished' : 'unfinished'">
     <td>{{ activity.activity.name }}</td>
     <td>{{ activity.countCompleted + '/' + activity.activity.setsPerDay }}</td>
     <td>
