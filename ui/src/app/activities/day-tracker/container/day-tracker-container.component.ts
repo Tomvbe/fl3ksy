@@ -16,6 +16,7 @@ export class DayTrackerContainerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.dailyActivityService.refreshActiveDailyActivities();
   }
 
   removeActivityExecution(dailyActivity: DailyActivity) {
