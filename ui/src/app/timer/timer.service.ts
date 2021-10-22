@@ -20,7 +20,7 @@ import {secondsToMs} from "./util/time.converter";
 export class TimerService {
 
   static readonly DEFAULT_STRETCH_TIME = 22000;
-  static readonly DEFAULT_REST_TIME = 7000;
+  static readonly DEFAULT_REST_TIME = 2000;
 
   private timerInterval: number | undefined;
   private elapsedTime = 0;
