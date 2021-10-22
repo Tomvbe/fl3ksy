@@ -7,10 +7,10 @@
   <div class="restInput">
     <input class="secondsInput" #restRef (change)="changeRest(restRef.value)" [value]="rest" type="number">
   </div>
-  <div class="soundLabel"><label>Toggle sound: </label></div>
-  <div class="soundInput">
+  <div class="muteLabel"><label>Toggle mute: </label></div>
+  <div class="muteInput">
     <label class="switch">
-      <input type="checkbox" checked>
+      <input type="checkbox" (change)="changeMute($event)" [checked]="mute">
       <span class="slider round"></span>
     </label>
   </div>

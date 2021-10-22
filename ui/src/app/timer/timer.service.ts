@@ -15,6 +15,8 @@ import {
 import {TypedAction} from "@ngrx/store/src/models";
 import {timeToString} from "./util/string.formatter";
 import {secondsToMs} from "./util/time.converter";
+import {TimerAudio} from "./timer.audio";
+import {MuteService} from "./mute.service";
 
 @Injectable()
 export class TimerService {
@@ -26,6 +28,7 @@ export class TimerService {
   private elapsedTime = 0;
   private _stretchTime = TimerService.DEFAULT_STRETCH_TIME;
   private _restTime = TimerService.DEFAULT_REST_TIME;
+  private timerAudio : TimerAudio;
 
   private readonly display$ = this.resetDisplay();
   private readonly subscription =
@@ -41,8 +44,23 @@ export class TimerService {
 
   constructor(
     private readonly audioService: AudioService,
+    private readonly muteService: MuteService,
     private readonly store: Store<TimerState>
-  ) { }
+  ) {
+    this.timerAudio = this.audioService;
+  }
+
+  turnOnSound() {
+    this.timerAudio = this.audioService;
+  }
+
+  turnOffSound() {
+    this.timerAudio = this.muteService;
+  }
+
+  isMuted(): boolean {
+    return this.timerAudio instanceof MuteService;
+  }
 
   toggleStartPause() {
     this.store.dispatch(startPauseToggleAction());
@@ -90,9 +108,9 @@ export class TimerService {
   }
 
   private stretch() {
-    this.audioService.letsGo();
+    this.timerAudio.letsGo();
     this.start(this._stretchTime, () => {
-      this.audioService.finished();
+      this.timerAudio.finished();
       this.restartTimer(finishAction())
     });
   }

@@ -31,4 +31,11 @@ export class TimerSettingsComponent implements OnInit {
     return msToSeconds(this.timer.stretchTime);
   }
 
+  toggleMute(isMuteOn: boolean) {
+    isMuteOn ? this.timer.turnOffSound() : this.timer.turnOnSound();
+  }
+
+  isMuted() {
+    return this.timer.isMuted();
+  }
 }

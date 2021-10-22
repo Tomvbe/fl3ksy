@@ -5,7 +5,7 @@
   grid-template-areas:
     'stretchLabel stretchLabel stretchInput'
     'restLabel restLabel restInput'
-    'soundLabel soundLabel soundInput';
+    'muteLabel muteLabel muteInput';
   grid-row-gap: 1em;
 }
 
@@ -32,8 +32,8 @@
   grid-area: restLabel;
 }
 
-.soundLabel {
-  grid-area: soundLabel;
+.muteLabel {
+  grid-area: muteLabel;
 }
 
 .restInput {

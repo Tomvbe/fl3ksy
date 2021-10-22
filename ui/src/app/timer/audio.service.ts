@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import {TimerAudio} from "./timer.audio";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AudioService {
+export class AudioService implements TimerAudio {
 
   private readonly letsGoAudio = new Audio('./assets/audio/514688__metrostock99__lets-go.ogg');
   private readonly finishedAudio = new Audio('./assets/audio/122255__jivatma07__level-complete.ogg');

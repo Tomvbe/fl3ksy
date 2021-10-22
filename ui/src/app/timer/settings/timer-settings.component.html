@@ -3,6 +3,8 @@
 <app-timer-interval-input
   [rest]="getRestTime()"
   [stretch]="getStretchTime()"
+  [mute]="isMuted()"
   (changeRestEvent)="setRestTime($event)"
   (changeStretchEvent)="setStretchTime($event)"
+  (changeMuteEvent)="toggleMute($event)"
 ></app-timer-interval-input>

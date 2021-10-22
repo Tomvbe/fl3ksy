@@ -13,11 +13,17 @@ export class TimerIntervalInputComponent implements OnInit {
   @Input()
   rest: number | undefined;
 
+  @Input()
+  mute: boolean | undefined;
+
   @Output()
   changeStretchEvent = new EventEmitter();
 
   @Output()
   changeRestEvent = new EventEmitter();
+
+  @Output()
+  changeMuteEvent = new EventEmitter();
 
   constructor() { }
 
@@ -32,5 +38,10 @@ export class TimerIntervalInputComponent implements OnInit {
   changeRest(value: string) {
     this.rest = parseInt(value);
     this.changeRestEvent.emit(this.rest);
+  }
+
+  changeMute(value: any) {
+    this.mute = value.currentTarget.checked;
+    this.changeMuteEvent.emit(this.mute);
   }
 }
